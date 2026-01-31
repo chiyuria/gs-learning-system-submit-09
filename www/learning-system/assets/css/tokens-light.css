@@ -1,0 +1,79 @@
+:root {
+  /* ===== Font ===== */
+  --font-ui: "Inter", "Roboto", system-ui, sans-serif;
+  --font-jp: "Noto Sans JP", "Zen Kaku Gothic New", sans-serif;
+  --font-accent: "Outfit", "Inter", sans-serif;
+
+  /* ===== Brand / Accent（soft purple） ===== */
+  --brand-1: #7c66ff;  
+  --brand-2: #5f4ee6;  
+
+  /* 状態色 */
+  --accent-green: #1fa971;
+  --accent-yellow: #c18a00;
+  --accent-red: #d6455d;
+
+  /* ===== Alias tokens（既存CSS互換） ===== */
+  --accent-success: var(--accent-green);
+  --accent-warning: var(--accent-yellow);
+  --accent-danger: var(--accent-red);
+
+  /* ===== Background（paper-like） ===== */
+  --bg: #f6f7fb;        
+  --panel: #ffffff;      
+  --panel-deep: #f1f2f7;
+
+  /* ===== Text（ink） ===== */
+  --fg: #1f2430;         
+  --fg-muted: rgba(31, 36, 48, 0.58);
+  --fg-inverse: #ffffff;
+
+  /* ===== Radius & Shadows ===== */
+  --radius: 10px;
+  --shadow: 0 10px 28px rgba(31, 36, 48, 0.10);
+
+  /* ===== Spacing ===== */
+  --space-1: 0.6rem;
+  --space-2: 1.2rem;
+  --space-3: 2rem;
+
+  /* ===== Button ===== */
+  --btn-primary-bg: var(--brand-2);
+  --btn-primary-hover: var(--brand-1);
+  --btn-primary-fg: #fff;
+
+  --btn-ghost-bg: transparent;
+  --btn-ghost-border: rgba(31, 36, 48, 0.16);
+  --btn-ghost-hover: rgba(95, 78, 230, 0.10);
+  --btn-ghost-fg: var(--fg);
+
+  --btn-danger-bg: #d6455d;
+  --btn-danger-hover: #b83b4f;
+  --btn-danger-fg: #fff;
+
+  --btn-icon-bg: rgba(31, 36, 48, 0.06);
+  --btn-icon-hover: rgba(95, 78, 230, 0.14);
+
+  /* ===== Form ===== */
+  --form-bg: #ffffff;
+  --form-bg-focus: #ffffff;
+  --form-border: rgba(31, 36, 48, 0.18);
+  --form-border-focus: rgba(95, 78, 230, 0.55);
+
+  --select-arrow: #1f2430;
+
+  /* ===== Modal ===== */
+  --modal-bg: #ffffff;
+  --modal-backdrop: rgba(15, 18, 28, 0.45);
+  --modal-btn: var(--brand-2);
+  --modal-btn-hover: var(--brand-1);
+  --modal-btn-cancel: #e7e8ef;
+  --modal-btn-cancel-hover: #d9dbe6;
+
+  /* ===== Scrollbar（ライト向け） ===== */
+  --scroll-track: rgba(31, 36, 48, 0.08);
+  --scroll-thumb: rgba(95, 78, 230, 0.55);
+  --scroll-thumb-hover: rgba(95, 78, 230, 0.75);
+  --scroll-size: 10px;
+  --scroll-radius: 999px;
+}

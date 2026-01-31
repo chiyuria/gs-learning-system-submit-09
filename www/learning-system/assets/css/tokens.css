@@ -1,0 +1,78 @@
+:root {
+  /* ===== Font ===== */
+  --font-ui: "Inter", "Roboto", system-ui, sans-serif;
+  --font-jp: "Noto Sans JP", "Zen Kaku Gothic New", sans-serif;
+  --font-accent: "Outfit", "Inter", sans-serif;
+
+  /* ===== Brand / Accent ===== */
+  --brand-1: #b59aff;
+  --brand-2: #8a6cff;
+
+  --accent-green: #40d98b;
+  --accent-yellow: #ffd84c;
+  --accent-red: #ff5f6e;
+
+  /* ===== Alias tokens ===== */
+  --accent-success: var(--accent-green);
+  --accent-warning: var(--accent-yellow);
+  --accent-danger: var(--accent-red);
+
+  /* ===== Background ===== */
+  --bg: #080a0f;
+  --panel: rgba(255, 255, 255, 0.03);
+  --panel-deep: rgba(255, 255, 255, 0.06);
+
+  /* ===== Text ===== */
+  --fg: #f5f6fa;
+  --fg-muted: rgba(245, 246, 250, 0.55);
+  --fg-inverse: #080a0f;
+
+  /* ===== Radius & Shadows ===== */
+  --radius: 8px;
+  --shadow: 0 0 18px rgba(150, 120, 255, 0.28);
+
+  /* ===== Spacing ===== */
+  --space-1: 0.6rem;
+  --space-2: 1.2rem;
+  --space-3: 2rem;
+
+  /* ===== Button ===== */
+  --btn-primary-bg: var(--brand-2);
+  --btn-primary-hover: var(--brand-1);
+  --btn-primary-fg: #fff;
+
+  --btn-ghost-bg: transparent;
+  --btn-ghost-border: rgba(255, 255, 255, 0.18);
+  --btn-ghost-hover: rgba(255, 255, 255, 0.12);
+  --btn-ghost-fg: var(--fg);
+
+  --btn-danger-bg: #d94141;
+  --btn-danger-hover: #f35b5b;
+  --btn-danger-fg: #fff;
+
+  --btn-icon-bg: rgba(255, 255, 255, 0.06);
+  --btn-icon-hover: rgba(255, 255, 255, 0.14);
+
+  /* ===== Form ===== */
+  --form-bg: rgba(255, 255, 255, 0.04);
+  --form-bg-focus: rgba(255, 255, 255, 0.08);
+  --form-border: rgba(255, 255, 255, 0.12);
+  --form-border-focus: var(--brand-1);
+
+  --select-arrow: #ffffff;
+
+  /* ===== Modal ===== */
+  --modal-bg: rgba(255, 255, 255, 0.05);
+  --modal-backdrop: rgba(0, 0, 0, 0.65);
+  --modal-btn: var(--brand-2);
+  --modal-btn-hover: var(--brand-1);
+  --modal-btn-cancel: #3a3a3a;
+  --modal-btn-cancel-hover: #4a4a4a;
+
+  /* ===== Scrollbar ===== */
+  --scroll-track: rgba(255, 255, 255, 0.05);
+  --scroll-thumb: var(--brand-2);
+  --scroll-thumb-hover: var(--brand-1);
+  --scroll-size: 8px;
+  --scroll-radius: 6px;
+}

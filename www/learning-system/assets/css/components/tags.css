@@ -1,0 +1,88 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.25rem 0.65rem;
+  min-height: 1.9rem;
+
+  border-radius: 999px;
+
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1;
+
+  white-space: nowrap;
+
+  align-self: flex-start;
+  width: fit-content;
+
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--fg-muted);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+
+  cursor: pointer;
+}
+
+.tag:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--fg);
+}
+
+.tag.is-active {
+  background: rgba(138, 108, 255, 0.22);
+  border-color: var(--brand-2);
+  color: #fff;
+}
+
+.tag:active {
+  transform: scale(0.96);
+}
+
+.tag-success {
+  background: rgba(95, 214, 161, 0.18);
+  border-color: rgba(95, 214, 161, 0.45);
+  color: var(--accent-success);
+}
+
+.tag-success.is-active {
+  background: rgba(95, 214, 161, 0.32);
+  border-color: var(--accent-success);
+  color: #fff;
+}
+
+.tag-warning {
+  background: rgba(230, 195, 106, 0.18);
+  border-color: rgba(230, 195, 106, 0.45);
+  color: var(--accent-warning);
+}
+
+.tag-warning.is-active {
+  background: rgba(230, 195, 106, 0.32);
+  border-color: var(--accent-warning);
+  color: #fff;
+}
+
+.tag-danger {
+  background: rgba(169, 106, 156, 0.18);
+  border-color: rgba(169, 106, 156, 0.45);
+  color: var(--accent-danger);
+}
+
+.tag-danger.is-active {
+  background: rgba(169, 106, 156, 0.32);
+  border-color: var(--accent-danger);
+  color: #fff;
+}
+
+.tag-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.tag.is-disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}

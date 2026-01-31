@@ -1,0 +1,8 @@
+# ===== Config (secrets) =====
+/config/ls/db.php
+
+# ===== Local tools =====
+/tools/make_hash.php
+
+# ===== Local SQL dumps =====
+/SQL/learn_sys.sql

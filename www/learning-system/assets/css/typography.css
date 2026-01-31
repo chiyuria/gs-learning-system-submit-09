@@ -1,0 +1,22 @@
+p {
+  margin: 0;
+  font-family: var(--font-jp), var(--font-ui);
+  font-size: 1.4rem;
+  line-height: 1.65;
+  color: var(--fg);
+}
+
+li {
+  font-family: var(--font-jp), var(--font-ui);
+  line-height: 1.6;
+}
+
+.text-muted {
+  font-size: 1.3rem;
+  color: var(--fg-muted);
+}
+
+/* 日本語密度を上げたい箇所用 */
+.jp-heavy {
+  font-family: var(--font-jp);
+}

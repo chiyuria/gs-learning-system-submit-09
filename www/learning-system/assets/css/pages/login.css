@@ -1,0 +1,40 @@
+
+.page-login .main-wrapper {
+  display: flex;
+  align-items: flex-start;   
+  justify-content: center;
+
+  height: calc(100vh - 5rem);
+  padding-top: 8vh; 
+  padding-left: var(--space-3);
+  padding-right: var(--space-3);
+}
+
+
+.page-login .col {
+  width: 100%;
+  max-width: 420px;
+
+  border-right: none;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.page-login .col-header {
+  justify-content: center;
+}
+
+.page-login .col-content {
+  overflow: visible; 
+}
+
+.page-login form fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.page-login .btn {
+  width: 100%;
+  margin-top: 1.2rem;
+}

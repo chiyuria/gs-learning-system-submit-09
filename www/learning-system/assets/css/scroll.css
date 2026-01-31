@@ -1,0 +1,26 @@
+/* --- 基本のスクロールバー幅 --- */
+::-webkit-scrollbar {
+  width: var(--scroll-size);
+  height: var(--scroll-size); /* 横スクにも適用 */
+}
+
+/* --- トラック（背景） --- */
+::-webkit-scrollbar-track {
+  background: var(--scroll-track);
+}
+
+/* --- 親指（つまむ部分） --- */
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb);
+  border-radius: var(--scroll-radius);
+}
+
+/* --- Hover（ちょい主張させる用） --- */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scroll-thumb-hover);
+}
+
+/* --- 横スク専用（高さだけ） --- */
+::-webkit-scrollbar:horizontal {
+  height: var(--scroll-size);
+}

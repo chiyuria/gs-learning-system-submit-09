@@ -1,0 +1,81 @@
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: var(--space-3);
+}
+
+.form-label {
+  font-size: 1.2rem;
+  color: var(--fg-muted);
+  font-family: var(--font-ui), var(--font-jp);
+}
+
+.input-base {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  font-size: 1.4rem;
+
+  font-family: var(--font-jp), var(--font-ui);
+
+  color: var(--fg);
+  background: var(--form-bg);
+  border: 1px solid var(--form-border);
+  border-radius: var(--radius);
+
+  outline: none;
+  transition: 0.15s ease;
+}
+
+.input-base:focus {
+  border-color: var(--form-border-focus);
+  background: var(--form-bg-focus);
+}
+
+.input-text {
+  height: 3.6rem;
+}
+
+.input-area {
+  min-height: 10rem;
+  resize: none;
+  line-height: 1.65;
+  letter-spacing: 0.02em;
+}
+
+.input-base:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.select-base {
+  width: 100%;
+  height: 3.6rem;
+  padding: 0 1.2rem;
+  font-size: 1.4rem;
+
+  font-family: var(--font-jp), var(--font-ui);
+
+  color: var(--fg);
+  background: var(--form-bg);
+  border: 1px solid var(--form-border);
+  border-radius: var(--radius);
+  outline: none;
+
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='20' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M5 7l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+
+  transition: 0.15s ease;
+}
+
+.select-base:focus {
+  border-color: var(--form-border-focus);
+  background: var(--form-bg-focus);
+}
+
+.select-base option {
+  font-family: var(--font-jp);
+  color: var(--fg-inverse);
+}

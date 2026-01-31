@@ -1,0 +1,68 @@
+/* Common Table Style */
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--space-3);
+
+  font-size: 1.3rem;
+  font-family: var(--font-ui), var(--font-jp);
+
+  background: var(--panel);
+  border: 1px solid var(--form-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.table th {
+  padding: 0.8rem 1rem;
+  text-align: left;
+
+  font-weight: 500;
+  color: var(--fg-muted);
+
+  background: var(--panel-deep);
+  border-bottom: 1px solid var(--form-border);
+}
+
+.table td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--form-border);
+  color: var(--fg);
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr:hover {
+  background: var(--form-bg-focus);
+}
+
+/* Deals Table */
+.deal-table td:nth-child(4) {
+  text-align: right;
+  font-family: var(--font-ui);
+}
+
+.deal-table td:nth-child(5) {
+  font-weight: 500;
+}
+
+/* Users Table */
+.users-table td:nth-child(4) {
+  text-align: left;
+  font-family: var(--font-jp), var(--font-ui);
+}
+
+.users-table td:nth-child(5) {
+  font-weight: 500;
+}
+
+.table a.btn {
+    text-decoration: none;
+}
