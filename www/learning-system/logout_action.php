@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 session_start();
 
 require_once __DIR__ . '/../../inc/ls/functions.php';
@@ -15,4 +18,4 @@ if (isset($_COOKIE[session_name()])) {
 session_destroy();
 
 redirect('index.php');
-exit();
+exit;

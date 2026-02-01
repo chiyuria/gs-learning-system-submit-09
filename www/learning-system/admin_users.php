@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 session_start();
@@ -6,7 +7,6 @@ session_start();
 require_once __DIR__ . '/../../inc/ls/functions.php';
 require_once __DIR__ . '/../../inc/ls/auth.php';
 
-// admin専用
 require_admin();
 
 $pdo = db_conn();
@@ -20,26 +20,36 @@ $sql = "
     id ASC
 ";
 $stmt = $pdo->prepare($sql);
-if (!$stmt->execute()) { sql_error($stmt); }
+if (!$stmt->execute()) {
+    sql_error($stmt);
+}
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// roleごとに分割
+// roleで分ける
 $students = [];
 $teachers = [];
 $admins = [];
 
 foreach ($users as $u) {
-  $role = (string)($u['role'] ?? '');
-  if ($role === 'student') $students[] = $u;
-  if ($role === 'teacher') $teachers[] = $u;
-  if ($role === 'admin')   $admins[] = $u;
+    $role = (string)($u['role'] ?? '');
+    if ($role === 'student') {
+        $students[] = $u;
+    }
+    if ($role === 'teacher') {
+        $teachers[] = $u;
+    }
+    if ($role === 'admin') {
+        $admins[] = $u;
+    }
 }
 ?>
 <!doctype html>
 <html lang="ja">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin | User Management</title>
 
     <link rel="stylesheet" href="./assets/css/tokens.css">
     <link rel="stylesheet" href="./assets/css/reset.css">
@@ -53,137 +63,77 @@ foreach ($users as $u) {
 
     <link rel="stylesheet" href="./assets/css/utilities.css">
     <link rel="stylesheet" href="./assets/css/pages/mvp.css">
-
-  <title>Admin | User Management</title>
 </head>
 
 <body>
-<header class="app-header">
-  <div class="header-title">Learning System</div>
-  <div style="margin-left:auto;">
-    <a href="home.php" class="text-muted">戻る</a>
-    <a href="logout_action.php" class="text-muted" style="margin-left:.8rem;">ログアウト</a>
-  </div>
-</header>
+    <header class="app-header">
+        <div class="header-title">Learning System</div>
+        <div style="margin-left:auto; display:flex; gap:.8rem; align-items:center;">
+            <a href="home.php" class="text-muted" style="font-size:.9rem;">戻る</a>
+            <a href="logout_action.php" class="text-muted" style="font-size:.9rem;">ログアウト</a>
+        </div>
+    </header>
 
-<main class="wrap">
+    <main class="wrap">
+        <section class="section">
+            <h2 class="col-title">ユーザー管理</h2>
+            <div class="hint">学生・教員・管理者一覧</div>
+        </section>
 
-  <section class="section">
-    <h2 class="col-title">ユーザー管理</h2>
-    <div class="hint">学生・教員・管理者の一覧（パスワードは表示しません）</div>
-  </section>
+        <?php
+        // 同じ表なのであとで関数化検討
+        $groups = [
+            '学生リスト' => $students,
+            '教員リスト' => $teachers,
+            '管理者リスト' => $admins,
+        ];
+        ?>
 
-  <!-- 学生 -->
-  <section class="section">
-    <h3 class="col-title">学生リスト</h3>
-    <div class="table-wrap">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>氏名</th>
-            <th>User ID</th>
-            <th>作成日</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php if (empty($students)): ?>
-            <tr><td colspan="4" class="text-muted">学生がいません</td></tr>
-          <?php else: ?>
-            <?php foreach ($students as $u): ?>
-              <tr>
-                <td><?= h((string)$u['id']) ?></td>
-                <td>
-                  <?php if (h((string)($u['name'] ?? '')) !== ''): ?>
-                    <?= h((string)$u['name']) ?>
-                  <?php else: ?>
-                    <span class="text-muted">（未設定）</span>
-                  <?php endif; ?>
-                </td>
-                <td><?= h((string)($u['login_code'] ?? '')) ?></td>
-                <td class="text-muted"><?= h((string)($u['created_at'] ?? '')) ?></td>
-              </tr>
-            <?php endforeach; ?>
-          <?php endif; ?>
-        </tbody>
-      </table>
-    </div>
-  </section>
+        <?php foreach ($groups as $label => $list): ?>
+            <section class="section">
+                <h3 class="col-title"><?= h($label) ?></h3>
 
-  <!-- 教員 -->
-  <section class="section">
-    <h3 class="col-title">教員リスト</h3>
-    <div class="table-wrap">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>氏名</th>
-            <th>User ID</th>
-            <th>作成日</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php if (empty($teachers)): ?>
-            <tr><td colspan="4" class="text-muted">教員がいません</td></tr>
-          <?php else: ?>
-            <?php foreach ($teachers as $u): ?>
-              <tr>
-                <td><?= h((string)$u['id']) ?></td>
-                <td>
-                  <?php if (h((string)($u['name'] ?? '')) !== ''): ?>
-                    <?= h((string)$u['name']) ?>
-                  <?php else: ?>
-                    <span class="text-muted">（未設定）</span>
-                  <?php endif; ?>
-                </td>
-                <td><?= h((string)($u['login_code'] ?? '')) ?></td>
-                <td class="text-muted"><?= h((string)($u['created_at'] ?? '')) ?></td>
-              </tr>
-            <?php endforeach; ?>
-          <?php endif; ?>
-        </tbody>
-      </table>
-    </div>
-  </section>
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>氏名</th>
+                                <th>User ID</th>
+                                <th>作成日</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (empty($list)): ?>
+                                <tr>
+                                    <td colspan="4" class="text-muted">該当ユーザーがいません</td>
+                                </tr>
+                            <?php else: ?>
+                                <?php foreach ($list as $u): ?>
+                                    <?php
+                                    $name = trim((string)($u['name'] ?? ''));
+                                    ?>
+                                    <tr>
+                                        <td><?= h((string)($u['id'] ?? '')) ?></td>
+                                        <td>
+                                            <?php if ($name !== ''): ?>
+                                                <?= h($name) ?>
+                                            <?php else: ?>
+                                                <span class="text-muted">（未設定）</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><?= h((string)($u['login_code'] ?? '')) ?></td>
+                                        <td class="text-muted"><?= h((string)($u['created_at'] ?? '')) ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        <?php endforeach; ?>
 
-  <!-- 管理者 -->
-  <section class="section">
-    <h3 class="col-title">管理者リスト</h3>
-    <div class="table-wrap">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>氏名</th>
-            <th>User ID</th>
-            <th>作成日</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php if (empty($admins)): ?>
-            <tr><td colspan="4" class="text-muted">管理者がいません</td></tr>
-          <?php else: ?>
-            <?php foreach ($admins as $u): ?>
-              <tr>
-                <td><?= h((string)$u['id']) ?></td>
-                <td>
-                  <?php if (h((string)($u['name'] ?? '')) !== ''): ?>
-                    <?= h((string)$u['name']) ?>
-                  <?php else: ?>
-                    <span class="text-muted">（未設定）</span>
-                  <?php endif; ?>
-                </td>
-                <td><?= h((string)($u['login_code'] ?? '')) ?></td>
-                <td class="text-muted"><?= h((string)($u['created_at'] ?? '')) ?></td>
-              </tr>
-            <?php endforeach; ?>
-          <?php endif; ?>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-</main>
+    </main>
 </body>
+
 </html>

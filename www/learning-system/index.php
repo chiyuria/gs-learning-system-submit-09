@@ -1,16 +1,16 @@
 <?php
-// index.php
-declare(strict_types=1);
 
-require_once __DIR__ . '/../../inc/ls/functions.php';
+declare(strict_types=1);
 
 session_start();
 
-$isLoggedIn = isset($_SESSION['user']) && is_array($_SESSION['user']);
+require_once __DIR__ . '/../../inc/ls/functions.php';
 
-if (!$isLoggedIn) {
+// ログインしてなければログイン画面
+if (!isset($_SESSION['user']) || !is_array($_SESSION['user'])) {
     require __DIR__ . '/login.php';
     exit;
 }
 
 redirect('home.php');
+exit;

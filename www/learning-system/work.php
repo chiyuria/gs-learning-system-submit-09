@@ -1,5 +1,4 @@
 <?php
-// work.php
 declare(strict_types=1);
 
 session_start();
@@ -155,6 +154,29 @@ if ($canShowWorkTemplate) {
         $workSavedText = (string)$row['work_text'];
     }
 }
+
+// Load latest AI feedback for this user/theme
+$aiFeedbackMd = '';
+$hasAiFeedback = false;
+
+$sqlAi = "
+  SELECT o.output_md
+  FROM ai_requests r
+  INNER JOIN ai_outputs o ON o.request_id = r.id
+  WHERE r.user_id = :user_id
+    AND r.theme_key = :theme_key
+    AND r.status = 'done'
+  ORDER BY r.id DESC
+  LIMIT 1
+";
+$stmt = $pdo->prepare($sqlAi);
+$stmt->execute([':user_id' => $userId, ':theme_key' => $themeKey]);
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+if ($row && trim((string)$row['output_md']) !== '') {
+    $hasAiFeedback = true;
+    $aiFeedbackMd = (string)$row['output_md'];
+}
+
 ?>
 <!doctype html>
 <html lang="ja">
@@ -234,45 +256,20 @@ if ($canShowWorkTemplate) {
             </div>
         </section>
 
-        <section class="section" aria-label="feedback-sample">
-            <h2 class="col-title">フィードバック（サンプル）</h2>
+        <section class="section" aria-label="feedback">
+            <h2 class="col-title">フィードバック</h2>
 
-            <p class="text-muted" style="margin:.6rem 0 0;">
-                ※ここは表示イメージ用の仮スペースです。
-            </p>
-
-            <div style="margin-top:1rem;">
-                <div class="q-title">コメント</div>
-                <div class="q-desc feedback-body">
-                    全体として、現在の考えを具体的な言葉で整理できています。
-                    感情や印象だけで終わらせず、内容として書き出せている点は評価できます。
-
-                    Q1について
-                    「理解できたこと」を自分の言葉で説明できている点は良い状態です。
-                    次のステップとして、
-                    ・なぜ理解できたのか
-                    ・どの行動が理解につながったのか
-                    を分解して考えると、再現性が高まります。
-
-                    Q2について
-                    伸ばしたいスキルを明確に言語化できています。
-                    今後は、そのスキルを
-                    ・どの場面で使いたいか
-                    ・どのレベルまでできるようになりたいか
-                    まで具体化できると、行動に落とし込みやすくなります。
-
-                    Q3について
-                    実行可能な行動を小さく設定できている点は適切です。
-                    まずは計画どおりに実行し、結果を振り返ることを優先してください。
-                    完璧さよりも、実行と修正を繰り返すことが重要です。
-
-                    まとめ
-                    現時点で考えが整理しきれていなくても問題ありません。
-                    今回の回答は、状況を把握し次の行動を決めるための十分な材料になっています。
-                    この内容をもとに、次の一手を実行してみましょう。
+            <?php if (!$hasAiFeedback): ?>
+                <p class="text-muted" style="margin:.6rem 0 0;">
+                    まだフィードバックがありません。3つの回答を保存すると自動で生成されます。
+                </p>
+            <?php else: ?>
+                <div class="q-desc feedback-body" style="margin-top:1rem;">
+                    <?= nl2br(h($aiFeedbackMd)) ?>
                 </div>
-            </div>
+            <?php endif; ?>
         </section>
+
 
         <?php if ($canShowWorkTemplate): ?>
             <section class="section" id="work-template">

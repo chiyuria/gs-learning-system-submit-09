@@ -1,5 +1,5 @@
 <?php
-// home.php
+
 declare(strict_types=1);
 
 session_start();
@@ -10,26 +10,29 @@ require_once __DIR__ . '/../../inc/ls/auth.php';
 require_login();
 
 $user = $_SESSION['user'] ?? null;
-$role = is_array($user) ? (string)($user['role'] ?? 'guest') : 'guest';
+$role = 'guest';
+if (is_array($user)) {
+    $role = (string)($user['role'] ?? 'guest');
+}
 
 $pdo = db_conn();
 
+// studentだけワーク一覧
 $themes = [];
 if ($role === 'student') {
-    // Fetch latest active template per theme_key
     $sql = "
-        SELECT wt.theme_key, wt.title, wt.body
-        FROM work_templates wt
-        INNER JOIN (
-            SELECT theme_key, MAX(id) AS max_id
-            FROM work_templates
-            WHERE is_active = 1
-            GROUP BY theme_key
-        ) latest
-            ON wt.theme_key = latest.theme_key
-            AND wt.id = latest.max_id
-        ORDER BY wt.theme_key ASC
-    ";
+    SELECT wt.theme_key, wt.title, wt.body
+    FROM work_templates wt
+    INNER JOIN (
+      SELECT theme_key, MAX(id) AS max_id
+      FROM work_templates
+      WHERE is_active = 1
+      GROUP BY theme_key
+    ) latest
+      ON wt.theme_key = latest.theme_key
+     AND wt.id = latest.max_id
+    ORDER BY wt.theme_key ASC
+  ";
 
     $stmt = $pdo->prepare($sql);
     if (!$stmt->execute()) {
@@ -64,7 +67,6 @@ if ($role === 'student') {
 <body>
     <header class="app-header">
         <div class="header-title">Learning System</div>
-
         <div style="margin-left:auto; display:flex; gap:.8rem; align-items:center;">
             <a href="logout_action.php" class="text-muted" style="font-size:.9rem;">ログアウト</a>
         </div>
@@ -92,17 +94,14 @@ if ($role === 'student') {
                             </thead>
                             <tbody>
                                 <?php foreach ($themes as $theme): ?>
+                                    <?php $k = (string)($theme['theme_key'] ?? ''); ?>
                                     <tr>
                                         <td>
-                                            <span class="badge badge-outline badge-sm">
-                                                <?= h((string)$theme['theme_key']) ?>
-                                            </span>
+                                            <span class="badge badge-outline badge-sm"><?= h($k) ?></span>
                                         </td>
-                                        <td><?= h((string)$theme['title']) ?></td>
+                                        <td><?= h((string)($theme['title'] ?? '')) ?></td>
                                         <td>
-                                            <a
-                                                class="btn btn-primary btn-sm"
-                                                href="question.php?theme_key=<?= urlencode((string)$theme['theme_key']) ?>">
+                                            <a class="btn btn-primary btn-sm" href="question.php?theme_key=<?= urlencode($k) ?>">
                                                 ワークに取り組む
                                             </a>
                                         </td>
@@ -113,6 +112,7 @@ if ($role === 'student') {
                     </div>
                 <?php endif; ?>
             </section>
+
         <?php else: ?>
             <section class="section">
                 <h2 class="col-title">メニュー</h2>

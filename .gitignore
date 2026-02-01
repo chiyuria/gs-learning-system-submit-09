@@ -1,8 +1,18 @@
 # ===== Config (secrets) =====
 /config/ls/db.php
+/config/ls/ai.php
+
+# ===== AI (secrets) =====
+/inc/ls/PromptBuilder.php
+/inc/ls/AiClient.php
 
 # ===== Local tools =====
 /tools/make_hash.php
+
+# ===== Dev tools =====
+dev_gemini_ping.php
+feedback_ai_action.php
+feedback_result.php
 
 # ===== Local SQL dumps =====
 /SQL/learn_sys.sql

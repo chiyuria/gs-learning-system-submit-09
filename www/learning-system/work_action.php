@@ -48,4 +48,5 @@ if (!$stmt->execute()) {
     sql_error($stmt);
 }
 
-redirect('work.php?work_saved=1#work-form');
+redirect('work.php?theme_key=' . urlencode($themeKey) . '&work_saved=1#work-form');
+
