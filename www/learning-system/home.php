@@ -115,14 +115,12 @@ if ($role === 'student') {
             </section>
         <?php else: ?>
             <section class="section">
-                <h2 class="col-title">管理メニュー</h2>
-                <div class="hint" style="margin-top:.6rem;">
-                    Role に応じて管理画面へ分岐します（今後拡張予定）。
-                </div>
-
+                <h2 class="col-title">メニュー</h2>
                 <div class="btn-row" style="margin-top:1rem;">
                     <a class="btn btn-primary" href="admin_dashboard.php">管理ダッシュボード</a>
-                    <a class="btn btn-ghost" href="admin_users.php">ユーザー管理（管理者のみ）</a>
+                    <?php if ($role === 'admin'): ?>
+                        <a class="btn btn-ghost" href="admin_users.php">ユーザー管理</a>
+                    <?php endif; ?>
                 </div>
             </section>
         <?php endif; ?>
